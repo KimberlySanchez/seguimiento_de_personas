@@ -46,7 +46,7 @@ CREATE TABLE `Usuario` (
   `idCredencial` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`),
   KEY `fkcredencial` (`idCredencial`),
-  CONSTRAINT `fkcredencial` FOREIGN KEY (`idCredencial`) REFERENCES `credencial` (`idCredencial`)
+  CONSTRAINT `fkcredencial` FOREIGN KEY (`idCredencial`) REFERENCES `Credencial` (`idCredencial`)
 ) ;
 
 -- ----------------------------
@@ -58,7 +58,7 @@ CREATE TABLE `Foto` (
   `idUsuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`idFoto`),
   KEY `fkUsuario` (`idUsuario`),
-  CONSTRAINT `fkUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`)
+  CONSTRAINT `fkUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`idUsuario`)
 ) ;
 
 -- ----------------------------
@@ -70,7 +70,7 @@ CREATE TABLE `Grupo` (
   `idUsuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`idGrupo`),
   KEY `fkUsuarioGrup` (`idUsuario`),
-  CONSTRAINT `fkUsuarioGrup` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`)
+  CONSTRAINT `fkUsuarioGrup` FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`idUsuario`)
 ) ;
 
 -- ----------------------------
@@ -99,11 +99,11 @@ CREATE TABLE `GrupoUsuario` (
   KEY `fkRol` (`idRol`),
   KEY `fkVisibilidad` (`idEstadoVisibilidad`),
   KEY `fkInvitacion` (`idEstadoInvitacion`),
-  CONSTRAINT `fkGrupo` FOREIGN KEY (`idGrupo`) REFERENCES `grupo` (`idGrupo`),
+  CONSTRAINT `fkGrupo` FOREIGN KEY (`idGrupo`) REFERENCES `Grupo` (`idGrupo`),
   CONSTRAINT `fkInvitacion` FOREIGN KEY (`idEstadoInvitacion`) REFERENCES `estadoInvitacion` (`idEstadoInvitacion`),
-  CONSTRAINT `fkRol` FOREIGN KEY (`idRol`) REFERENCES `rol` (`idRol`),
-  CONSTRAINT `fkUser` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`),
-  CONSTRAINT `fkVisibilidad` FOREIGN KEY (`idEstadoVisibilidad`) REFERENCES `estadoVisibilidad` (`idEstadoVisibilidad`)
+  CONSTRAINT `fkRol` FOREIGN KEY (`idRol`) REFERENCES `Rol` (`idRol`),
+  CONSTRAINT `fkUser` FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`idUsuario`),
+  CONSTRAINT `fkVisibilidad` FOREIGN KEY (`idEstadoVisibilidad`) REFERENCES `EstadoVisibilidad` (`idEstadoVisibilidad`)
 ) ;
 
 
@@ -115,11 +115,11 @@ CREATE TABLE `Ubicacion` (
   `latitud` varchar(255) DEFAULT NULL,
   `longitud` varchar(255) DEFAULT NULL,
   `altura` varchar(255) DEFAULT NULL,
-  `fechaHora` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `fechaHora` datetime  NULL,
   `idUsuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUbicacion`),
   KEY `fkUsuarioUb` (`idUsuario`),
-  CONSTRAINT `fkUsuarioUb` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`)
+  CONSTRAINT `fkUsuarioUb` FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`idUsuario`)
 ) ;
 
 
